@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">TriviaGameApplication</string>
+    <string name="play_learn"><![CDATA[Play & Learn]]></string>
+    <string name="subtitle">Want to see how well \n you fare against our \n questions?</string>
+    <string name="test_me">Test Me</string>
 </resources>
