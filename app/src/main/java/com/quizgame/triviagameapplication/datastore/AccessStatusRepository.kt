@@ -1,4 +1,4 @@
-package com.quizgame.triviagameapplication
+package com.quizgame.triviagameapplication.datastore
 
 import android.util.Log
 import androidx.datastore.core.DataStore

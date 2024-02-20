@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.quizgame.triviagameapplication.databinding.ActivityRoutingBinding
+import com.quizgame.triviagameapplication.datastore.AccessStatus
 import kotlinx.coroutines.launch
 
 class RoutingActivity : AppCompatActivity() {
