@@ -15,17 +15,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/question" />
 
-    <ProgressBar
+    <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:max="10"
+        android:layout_marginTop="10dp"
+        android:max="100"
         android:paddingHorizontal="20dp"
-        android:progressTint="@color/greenblue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" /> <!-- Đặt giá trị max là số lượng câu hỏi -->
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
