@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.widget.ListPopupWindow
 import com.quizgame.triviagameapplication.common.StartInfo
 import com.quizgame.triviagameapplication.databinding.ActivityStartGameBinding
+import com.quizgame.triviagameapplication.question.QuestionActivity
 
 class StartGameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStartGameBinding

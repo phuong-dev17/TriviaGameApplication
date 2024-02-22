@@ -1,24 +1,30 @@
-package com.quizgame.triviagameapplication
+package com.quizgame.triviagameapplication.question
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.core.content.IntentCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.quizgame.triviagameapplication.QuestionState
 import com.quizgame.triviagameapplication.common.QuestionData
 import com.quizgame.triviagameapplication.common.StartInfo
+import com.quizgame.triviagameapplication.databinding.ActivityQuestionBinding
 import kotlinx.coroutines.launch
 
 class QuestionActivity : AppCompatActivity() {
-    private val viewModel : TriviaViewModel by viewModels()
+    private val viewModel : TriviaViewModel by viewModels {
+        TriviaViewModel.factory(startInfo())
+    }
+
+    private lateinit var binding: ActivityQuestionBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_question)
+        binding = ActivityQuestionBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 
         lifecycleScope.launch {
@@ -26,7 +32,7 @@ class QuestionActivity : AppCompatActivity() {
                 viewModel.state.collect() { state ->
                     when (state) {
                         QuestionState.Loading -> {}
-                        is QuestionState.Loaded -> showQuestions(state.question)
+                        is QuestionState.Loaded -> showQuestions(state.questions)
                         QuestionState.Failure -> {}
                     }
                 }
@@ -39,8 +45,9 @@ class QuestionActivity : AppCompatActivity() {
         return startInfo!!
     }
 
-    private fun showQuestions(question: List<QuestionData>) {
-        Log.d("P123", "TRIVIA DATA $question")
+    private fun showQuestions(questions: List<QuestionData>) {
+        val adapter = QuestionViewPagerAdapter(this, questions)
+        binding.viewPager.adapter = adapter
     }
 
     companion object {
