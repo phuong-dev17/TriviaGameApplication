@@ -33,18 +33,22 @@ class QuestionActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
                 viewModel.state.collect() { state ->
+                    Log.d("P123", "STATE $state")
                     when (state) {
                         QuestionState.Loading -> {}
                         is QuestionState.Loaded -> showQuestions(state.questions)
                         QuestionState.Failure -> {}
                     }
+                    Log.d("P123", "STATE END")
                 }
             }
         }
     }
 
     private fun startInfo() : StartInfo {
+        Log.d("P123", "STARTINFO")
         val startInfo = IntentCompat.getParcelableExtra(intent, KEY, StartInfo::class.java)
+        Log.d("P123", "STARTINFO END")
         return startInfo!!
     }
 

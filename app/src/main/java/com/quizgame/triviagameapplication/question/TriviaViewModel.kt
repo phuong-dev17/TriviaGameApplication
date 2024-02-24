@@ -1,5 +1,6 @@
 package com.quizgame.triviagameapplication.question
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -18,25 +19,32 @@ class TriviaViewModel(private val startInfo: StartInfo) : ViewModel() {
     val state = _state
 
     init {
+        Log.d("P123", "GET INFO")
         getTriviaInfo(startInfo)
-
+        Log.d("P123", "GET INFO END")
     }
 
     private fun getTriviaInfo(startInfo: StartInfo) {
         viewModelScope.launch(Dispatchers.IO) {
-            val triviaData = TriviaAPI.triviaApiService.getTriviaInfo(
-                startInfo.numberOfQuestion?:10,
-                startInfo.category,
-                startInfo.difficulty
-            )
-               val questionData = triviaData.map {
-                   QuestionData(
-                       category = it.category,
-                       question = it.question.text,
-                       correctAnswer = it.correctAnswer,
-                       incorrectAnswers = it.incorrectAnswers
-            ) }
-            _state.value = QuestionState.Loaded(questionData)
+            try {
+                val triviaData = TriviaAPI.triviaApiService.getTriviaInfo(
+                    startInfo.numberOfQuestion?:10,
+                    startInfo.category,
+                    startInfo.difficulty
+                )
+                val questionData = triviaData.map {
+                    QuestionData(
+                        question = it.question.text,
+                        allAnswer = (it.incorrectAnswers).toMutableList().plus(it.correctAnswer),
+                        correctAnswer = it.correctAnswer,
+                        currentAnswer = null
+                    ) }
+                _state.value = QuestionState.Loaded(questionData)
+            } catch (exception: Exception) {
+                Log.d( "P123", "$exception")
+                throw exception
+            }
+
         }
     }
 

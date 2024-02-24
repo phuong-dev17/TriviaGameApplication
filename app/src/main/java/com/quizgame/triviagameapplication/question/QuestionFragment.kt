@@ -1,11 +1,13 @@
 package com.quizgame.triviagameapplication.question
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.BundleCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.quizgame.triviagameapplication.R
 import com.quizgame.triviagameapplication.common.QuestionData
 import com.quizgame.triviagameapplication.databinding.FragmentQuestionBinding
@@ -46,6 +48,17 @@ class QuestionFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d("P123", "BEFORE")
         binding.txtQuestion.text = questionData.question
+        binding.recyclerview.adapter = AnswerRecyclerAdapter(
+            items = questionData.allAnswer.shuffled(),
+            onCellClicked = ::showResult)
+        binding.recyclerview.layoutManager = GridLayoutManager(
+            requireContext(),2, GridLayoutManager.VERTICAL, false)
+        Log.d("P123", "AFTER")
+    }
+
+    private fun showResult(answer: String) {
+        Log.d("P123", "SHOW RESULT")
     }
 }

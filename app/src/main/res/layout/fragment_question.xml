@@ -20,26 +20,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnTrue"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:text="True"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtQuestion" />
-
-    <Button
-        android:id="@+id/btnFalse"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="40dp"
-        android:backgroundTint="@color/orange"
-        android:text="False"
-        app:layout_constraintBottom_toBottomOf="@id/btnTrue"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/btnTrue" />
-
+   <androidx.recyclerview.widget.RecyclerView
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+        android:id="@+id/recyclerview"
+       android:layout_marginBottom="350dp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
