@@ -7,14 +7,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.BundleCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.quizgame.triviagameapplication.R
 import com.quizgame.triviagameapplication.common.AnswerData
 import com.quizgame.triviagameapplication.common.QuestionData
 import com.quizgame.triviagameapplication.databinding.FragmentQuestionBinding
+import com.quizgame.triviagameapplication.repository.AnswerDB
+import com.quizgame.triviagameapplication.repository.AnswerDBInterface
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class QuestionFragment : Fragment() {
     private var _binding: FragmentQuestionBinding? = null
+    private lateinit var answerDBInterface: AnswerDBInterface
     private val binding get() = _binding!!
     private lateinit var questionData: QuestionData
 
@@ -49,6 +55,9 @@ class QuestionFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
+        answerDBInterface = AnswerDB(requireContext())
+        
         binding.txtQuestion.text = questionData.question
         binding.recyclerview.adapter = AnswerRecyclerAdapter(
             items = questionData.allAnswer.shuffled(),
@@ -64,5 +73,8 @@ class QuestionFragment : Fragment() {
             userAnswer = answer,
             isCorrect = (answer == questionData.correctAnswer)
         )
+        lifecycleScope.launch (Dispatchers.IO) {
+            answerDBInterface.add(answerData)
+        }
     }
 }
