@@ -17,11 +17,10 @@ import kotlinx.coroutines.launch
 class TriviaViewModel(private val startInfo: StartInfo) : ViewModel() {
     private var _state : MutableStateFlow<QuestionState> = MutableStateFlow(QuestionState.Loading)
     val state = _state
+    private lateinit var questionData : List<QuestionData>
 
     init {
-        Log.d("P123", "GET INFO")
         getTriviaInfo(startInfo)
-        Log.d("P123", "GET INFO END")
     }
 
     private fun getTriviaInfo(startInfo: StartInfo) {
@@ -32,8 +31,9 @@ class TriviaViewModel(private val startInfo: StartInfo) : ViewModel() {
                     startInfo.category,
                     startInfo.difficulty
                 )
-                val questionData = triviaData.map {
+                questionData = triviaData.map {
                     QuestionData(
+                        questionId = it.id,
                         question = it.question.text,
                         allAnswer = (it.incorrectAnswers).toMutableList().plus(it.correctAnswer),
                         correctAnswer = it.correctAnswer,
@@ -47,8 +47,6 @@ class TriviaViewModel(private val startInfo: StartInfo) : ViewModel() {
 
         }
     }
-
-
 
     companion object {
         fun factory(startInfo: StartInfo): ViewModelProvider.Factory {
