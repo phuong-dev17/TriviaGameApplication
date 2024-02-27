@@ -11,4 +11,6 @@
     <string name="question">Question</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="all">All</string>
+    <string name="user_answer">Your answer is %s</string>
 </resources>

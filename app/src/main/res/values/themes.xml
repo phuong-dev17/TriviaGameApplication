@@ -5,6 +5,7 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorPrimary">@color/orange</item>
         <item name="colorPrimaryContainer">@color/gray89</item>
+        <item name="colorSecondaryContainer">@android:color/holo_orange_dark</item>
     </style>
 
     <style name="Theme.TriviaGameApplication" parent="Base.Theme.TriviaGameApplication" />
