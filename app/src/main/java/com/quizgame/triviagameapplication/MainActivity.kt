@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.quizgame.triviagameapplication.databinding.ActivityMainBinding
+import com.quizgame.triviagameapplication.pastResult.PastResultActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
@@ -16,6 +17,13 @@ class MainActivity : AppCompatActivity() {
         binding.btnStartGame.setOnClickListener {
             gotoStartGameActivity()
         }
+        binding.btnPastResults.setOnClickListener {
+            gotoPastResultActivity()
+        }
+    }
+
+    private fun gotoPastResultActivity() {
+        startActivity(Intent(this, PastResultActivity::class.java))
     }
 
     private fun gotoStartGameActivity() {
