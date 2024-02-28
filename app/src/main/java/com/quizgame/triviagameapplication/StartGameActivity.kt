@@ -37,6 +37,8 @@ class StartGameActivity : AppCompatActivity() {
         binding = ActivityStartGameBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        configureToolbar()
+
         binding.edtSelectCategory.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
                 createCategoryPopupWindow(categories)
@@ -68,7 +70,15 @@ class StartGameActivity : AppCompatActivity() {
             }
         }
 
-        private fun createCategoryPopupWindow(items: List<String>) {
+    private fun configureToolbar() {
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24)
+        }
+    }
+
+    private fun createCategoryPopupWindow(items: List<String>) {
             Log.d("P123", " CALLING POPUP WINDOWN")
 
             val listPopupWindow = ListPopupWindow(this)
